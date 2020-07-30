@@ -61,7 +61,7 @@ app.post("/api/notes", function (req, res) {
 });
 
 // if user would like to delete note:
-app.delete("/api/notes/:id", function (req, res) {
+/* app.delete("/api/notes/:id", function (req, res) {
     let noteID= req.params.id;
     fs.readFile("db/db.json", "utf8", function (err, data) {
         let updatedNotes = JSON.parse(data).filter((note) => {
@@ -79,6 +79,6 @@ app.delete("/api/notes/:id", function (req, res) {
         });
         res.json(stringifyNote);
     });
-});
+}); */
 
 
