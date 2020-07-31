@@ -56,7 +56,7 @@ const handleNoteSave = function () {
     text: $noteText.val(),
   };
 
-  saveNote(newNote).then(() => {
+  saveNote(newNote).then(function(data) {
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -102,7 +102,7 @@ const handleRenderSaveBtn = function () {
 };
 
 // Render's the list of note titles
-const renderNoteList = (notes) => {
+const renderNoteList = function(notes) {
   $noteList.empty();
 
   const noteListItems = [];
@@ -136,8 +136,10 @@ const renderNoteList = (notes) => {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => {
-  return getNotes().then(renderNoteList);
+const getAndRenderNotes = function() {
+  return getNotes().then(function(data) {
+    renderNoteList(data);
+  });
 };
 
 $saveNoteBtn.on("click", handleNoteSave);
