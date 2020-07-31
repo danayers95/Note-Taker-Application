@@ -5,31 +5,37 @@ const fs = require("fs");
 const path = require("path");
 
 // Make Express listen on port 3000
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Express is set up
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 let notes = require("./db/db.json");
 
 // server begins listening
+
 app.listen(PORT, function () {
     console.log(`Note Taking Application is running on port ${ PORT }`);
 });
 
 // create routes for html
+
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
 // for heroku deployment
+
 app.get("/", function(req, res) {
     res.json(path.join(__dirname, "public/index.html"));
 });
 
 // routes db.json to the html page
+
 app.get("/api/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
@@ -44,6 +50,7 @@ app.get("*", function (req, res) {
 });
 
 // function for application to display notes given
+
 app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", "utf8", function (err, data) {
         if (err) {
@@ -55,6 +62,7 @@ app.get("/api/notes", function (req, res) {
 });
 
 // new note is created 
+
 app.post("/api/notes", function(req, res) {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let newNote = req.body;
@@ -68,6 +76,7 @@ app.post("/api/notes", function(req, res) {
 })
 
 // allows user to delete saved notes
+
 app.delete("/api/notes/:id", function(req, res) {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let noteID = req.params.id;
