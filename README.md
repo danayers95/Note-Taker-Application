@@ -22,6 +22,8 @@ Users can write and store notes to a server using this very simple and lightweig
 ## Installation:
 After forking this repository, run 'npm i' to download all necessary node modules. 
 
+A link to my deployed application on heroku can be found [here](https://shielded-harbor-35021.herokuapp.com/notes/).
+
 ## Usage:
 No usage info given
 
