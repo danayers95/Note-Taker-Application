@@ -6,7 +6,7 @@ const path = require("path");
 
 // Make Express listen on port 3000
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Express is set up
 app.use(express.urlencoded({ extended: true }));
@@ -16,12 +16,16 @@ let notes = require("./db/db.json");
 
 // server begins listening
 app.listen(PORT, function () {
-    console.log("App listening on PORT " + PORT);
+    console.log(`App is running on port ${ PORT }`);
 });
 
 // create routes for html
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
+app.get("/", function(req, res) {
+    res.json(path.join(__dirname, "public/index.html"));
 });
 
 // routes db.json to the html page
