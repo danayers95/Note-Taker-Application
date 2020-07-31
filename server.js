@@ -1,4 +1,4 @@
-// set up app with express
+// set up the application
 
 const express = require("express");
 const fs = require("fs");
@@ -16,7 +16,7 @@ let notes = require("./db/db.json");
 
 // server begins listening
 app.listen(PORT, function () {
-    console.log(`App is running on port ${ PORT }`);
+    console.log(`Note Taking Application is running on port ${ PORT }`);
 });
 
 // create routes for html
@@ -81,14 +81,13 @@ app.delete("/api/notes/:id", function(req, res) {
         currNote.id = newID.toString();
         newID++;
     }
-
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     res.json(savedNotes);
 })
 
 
 
-// new note is created
+
 // app.post("/api/notes", function (req, res) {
 //     let randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
 //     let id = randLetter + Date.now();
@@ -97,8 +96,6 @@ app.delete("/api/notes/:id", function(req, res) {
 //         title: req.body.title,
 //         text: req.body.text,
 //     };
-//     console.log(typeof notes);
-//     notes.push(newNote);
 //     const stringifyNote = JSON.stringify(notes);
 //     res.json(notes);
 //     fs.writeFile("db/db.json", stringifyNote, (err) => {
@@ -109,14 +106,12 @@ app.delete("/api/notes/:id", function(req, res) {
 //     });
 // });
 
-// // if user would like to delete note:
+
 // app.delete("/api/notes/:id", function (req, res) {
 //     let noteID= req.params.id;
 //     fs.readFile("db/db.json", "utf8", function (err, data) {
 //         let updatedNotes = JSON.parse(data).filter((note) => {
 //             console.log("note.id", note.id);
-//             console.log("noteID", noteID);
-//             return note.id !== noteID;
 //         });
 //         notes = updatedNotes;
 //         const stringifyNote = JSON.stringify(updatedNotes);
