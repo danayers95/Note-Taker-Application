@@ -4,7 +4,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-// Make Express listen on port 3000
+// Make Express listen on port 3000 while working with heroku
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,6 +44,8 @@ app.get("/api/notes/:id", function(req, res) {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     res.json(savedNotes[Number(req.params.id)]);
 });
+
+// creates route for index page
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
@@ -96,7 +98,7 @@ app.delete("/api/notes/:id", function(req, res) {
 
 
 
-
+// bad code
 // app.post("/api/notes", function (req, res) {
 //     let randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
 //     let id = randLetter + Date.now();
